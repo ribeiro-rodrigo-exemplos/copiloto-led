@@ -1,0 +1,21 @@
+group 'br.com.m2msolutions.copiloto'
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'br.com.m2msolutions.frota:m2m-kernel:0.0.1-SNAPSHOT'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
