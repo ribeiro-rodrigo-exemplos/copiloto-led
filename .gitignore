@@ -1,5 +1,6 @@
 .gradle
 build/*
+target
 !build/generated/
 !gradle/wrapper/gradle-wrapper.jar
 
