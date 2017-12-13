@@ -1,31 +1,29 @@
 package br.com.m2msolutions.copiloto.led.modelo
 
-/**
- * Created by rodrigo on 04/12/17.
- */
 class StatusResolver {
 
     private todosOsStatus = []
 
-    Status resolveStatus(Integer minutos){
+    Status resolveStatus(Double minutos){
         if(!todosOsStatus)
             criarStatus()
 
         todosOsStatus.find{
-            it.range.contains minutos
+            Status status ->
+                minutos >= status.tempoMinimo && minutos <= status.tempoMaximo
         }
     }
 
     private criarStatus(){
 
         todosOsStatus = [
-                new Status(range: (Integer.MIN_VALUE..<-3),codigo: 'fff80000'),
-                new Status(range: [-2],codigo: '00f80000'),
-                new Status(range: [-3],codigo: '0ff80000'),
-                new Status(range: (-1..1),codigo: '00060000'),
-                new Status(range: [2],codigo: '0001f000'),
-                new Status(range: [3],codigo: '0001ff00'),
-                new Status(range: (4 .. Integer.MAX_VALUE),codigo: '0001fff8')
+            new Status(tempoMinimo: Double.MIN_VALUE,tempoMaximo: -3.1, codigo: 'fff80000'),
+            new Status(tempoMinimo: -2.0,tempoMaximo: -1.1, codigo: '00f80000'),
+            new Status(tempoMinimo: -3.0,tempoMaximo: -2.1, codigo: '0ff80000'),
+            new Status(tempoMinimo: -1.0,tempoMaximo: 1.0, codigo: '00060000'),
+            new Status(tempoMinimo: 1.1,tempoMaximo: 2.0, codigo: '0001f000'),
+            new Status(tempoMinimo: 2.1,tempoMaximo: 3.0, codigo: '0001ff00'),
+            new Status(tempoMinimo: 3.1,tempoMaximo: Double.MAX_VALUE ,codigo: '0001fff8')
         ]
     }
 }

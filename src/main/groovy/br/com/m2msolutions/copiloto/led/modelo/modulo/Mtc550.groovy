@@ -1,16 +1,19 @@
 package br.com.m2msolutions.copiloto.led.modelo.modulo
 
 import br.com.m2m.frota.kernel.dominio.mensagem.ComandosMessage
+import br.com.m2m.frota.kernel.dominio.xml.Parameter
+import br.com.m2m.frota.util.Const
+import br.com.m2msolutions.copiloto.led.modelo.Status
 import groovy.transform.CompileStatic
-import groovy.transform.PackageScope
 
 @CompileStatic
-@PackageScope
-class Mtc550{
+class Mtc550 implements Modulo{
 
+    List<ComandosMessage> montarComandos(String idModulo, Status status,Boolean openOrCloseTrip) {
 
-    ComandosMessage montarComandos() {
+        def comando = criarComando idModulo, Const.TYPE_12
 
-        return null
+        comando.parameters << new Parameter(Const.FORMAT,Const.HEXA) << new Parameter(Const.AUXOUTPUTDATA,status?.codigo)
+        [comando]
     }
 }

@@ -10,11 +10,11 @@ import groovy.transform.CompileStatic
 class Mtc500 implements Modulo{
 
     @Override
-    ComandosMessage montarComandos(String idModulo, Status status) {
+    List<ComandosMessage> montarComandos(String idModulo, Status status,Boolean openOrCloseTrip) {
 
         def comando = criarComando idModulo, Const.TYPE_12
 
         comando.parameters << new Parameter(Const.FORMAT,Const.HEXA) << new Parameter(Const.AUXOUTPUTDATA,status?.codigo)
-        comando
+        [comando]
     }
 }

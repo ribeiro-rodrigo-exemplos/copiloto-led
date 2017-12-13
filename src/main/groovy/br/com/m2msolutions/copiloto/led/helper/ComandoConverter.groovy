@@ -1,4 +1,4 @@
-package br.com.m2msolutions.copiloto.led.infra
+package br.com.m2msolutions.copiloto.led.helper
 
 import br.com.m2m.frota.kernel.dominio.mensagem.ComandosMessage
 import com.fasterxml.jackson.databind.ObjectMapper
