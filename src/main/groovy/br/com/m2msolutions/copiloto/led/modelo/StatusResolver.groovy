@@ -17,7 +17,7 @@ class StatusResolver {
     private criarStatus(){
 
         todosOsStatus = [
-            new Status(tempoMinimo: Double.MIN_VALUE,tempoMaximo: -3.1, codigo: 'fff80000'),
+            new Status(tempoMinimo: Double.MIN_EXPONENT,tempoMaximo: -3.1, codigo: 'fff80000'),
             new Status(tempoMinimo: -2.0,tempoMaximo: -1.1, codigo: '00f80000'),
             new Status(tempoMinimo: -3.0,tempoMaximo: -2.1, codigo: '0ff80000'),
             new Status(tempoMinimo: -1.0,tempoMaximo: 1.0, codigo: '00060000'),
