@@ -16,7 +16,7 @@ class CopilotoLed {
     private StatusResolver statusResolver = new StatusResolver()
     private DespachanteDeComando despachante
 
-    void enviarComando(Integer clienteId, Integer veiculoId, String modeloDoModulo, String moduloId,Double minutos,
+    void enviarComando(Integer clienteId, Integer veiculoId, String modeloDoModulo, String moduloId,Integer minutos,
                        Integer tempo = 1, Boolean openOrCloseTrip = false){
 
         def modulo = obterModulo modeloDoModulo

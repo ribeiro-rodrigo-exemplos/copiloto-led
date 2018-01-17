@@ -9,8 +9,7 @@ class Status {
 
     String codigo
     Integer duracao
-    Double tempoMinimo
-    Double tempoMaximo
+    def range = []
 
     String getCodigo(){
         if(!duracao)
