@@ -2,6 +2,7 @@ package br.com.m2msolutions.copiloto.led
 
 import br.com.m2msolutions.copiloto.led.helper.DespachanteDeComando
 import br.com.m2msolutions.copiloto.led.helper.DespachanteDeComandoFactory
+import br.com.m2msolutions.copiloto.led.modelo.ComandoRequest
 import br.com.m2msolutions.copiloto.led.modelo.StatusResolver
 import br.com.m2msolutions.copiloto.led.modelo.modulo.Modelo
 import br.com.m2msolutions.copiloto.led.modelo.modulo.Modulo
@@ -16,22 +17,35 @@ class CopilotoLed {
     private StatusResolver statusResolver = new StatusResolver()
     private DespachanteDeComando despachante
 
-    void enviarComando(Integer clienteId, Integer veiculoId, String modeloDoModulo, String moduloId,Integer minutos,
-                       Integer tempo = 1, Boolean openOrCloseTrip = false){
+    ComandoRequest criarRequisicao(Integer clienteId, Integer veiculoId, String modeloDoModulo, String moduloId, Integer minutos,
+                                Integer duracaoDaIluminacao = 1, Boolean openOrCloseTrip = false){
 
-        def modulo = obterModulo modeloDoModulo
         def status = statusResolver.resolveStatus minutos
+        status.duracao = duracaoDaIluminacao
 
-        status.duracao = tempo
+        new ComandoRequest(
+            modeloDoModulo:modeloDoModulo,
+            minutos: minutos,
+            clienteId:clienteId,
+            veiculoId:veiculoId,
+            moduloId:moduloId,
+            status:status,
+            openOrCloseTrip:openOrCloseTrip
+        )
+    }
 
-        def comandos = modulo.montarComandos moduloId, status, openOrCloseTrip
+    void enviarComando(ComandoRequest request){
+
+        def modulo = obterModulo request?.modeloDoModulo
+
+        def comandos = modulo.montarComandos request?.moduloId, request?.status, request?.openOrCloseTrip
 
         despachante = DespachanteDeComandoFactory.obterDespachante host, porta
 
-        despachante.despachar clienteId, veiculoId, comandos
+        despachante.despachar request?.clienteId, request?.veiculoId, comandos
     }
 
-    private Modulo obterModulo(String modeloDoModulo){
+    private static Modulo obterModulo(String modeloDoModulo){
         Modelo modelo = modeloDoModulo.toUpperCase() as Modelo
         modelo.obterModulo()
     }
