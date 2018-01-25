@@ -10,7 +10,6 @@ class ComandoRequest implements Serializable {
     String moduloId
     Boolean openOrCloseTrip
 
-    @Override
     boolean equals(ComandoRequest request) {
         request?.status == status && request?.veiculoId == veiculoId
     }
