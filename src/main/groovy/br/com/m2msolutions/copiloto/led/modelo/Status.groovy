@@ -5,7 +5,7 @@ import groovy.transform.CompileStatic
 import java.text.DecimalFormat
 
 @CompileStatic
-class Status implements Serializable {
+class Status {
 
     String codigo
     Integer duracao

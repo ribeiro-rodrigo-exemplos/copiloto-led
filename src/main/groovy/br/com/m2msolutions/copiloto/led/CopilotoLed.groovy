@@ -2,8 +2,6 @@ package br.com.m2msolutions.copiloto.led
 
 import br.com.m2msolutions.copiloto.led.helper.DespachanteDeComando
 import br.com.m2msolutions.copiloto.led.helper.DespachanteDeComandoFactory
-import br.com.m2msolutions.copiloto.led.modelo.ComandoRequest
-import br.com.m2msolutions.copiloto.led.modelo.Status
 import br.com.m2msolutions.copiloto.led.modelo.StatusResolver
 import br.com.m2msolutions.copiloto.led.modelo.modulo.Modelo
 import br.com.m2msolutions.copiloto.led.modelo.modulo.Modulo
@@ -18,14 +16,14 @@ class CopilotoLed {
     private StatusResolver statusResolver = new StatusResolver()
     private DespachanteDeComando despachante
 
-    Status obterStatus(Integer minutos){
-        statusResolver.resolveStatus minutos
+    String obterCodigoDeStatus(Integer minutos){
+        statusResolver.resolveStatus(minutos).codigo
     }
 
     void enviarComando(Integer clienteId, Integer veiculoId, String modeloDoModulo, String moduloId, Integer minutos,
                                 Integer duracaoDaIluminacao = 1, Boolean openOrCloseTrip = false){
 
-        def status = obterStatus minutos
+        def status = statusResolver.resolveStatus minutos
         status.duracao = duracaoDaIluminacao
 
         def modulo = obterModulo modeloDoModulo
