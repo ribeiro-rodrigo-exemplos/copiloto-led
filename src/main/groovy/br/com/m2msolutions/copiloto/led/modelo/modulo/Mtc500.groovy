@@ -16,16 +16,18 @@ class Mtc500 implements Modulo{
 
         if(openOrCloseTrip){
 
-            def comando1 = criarComando idModulo, Const.TYPE_68
+            def comando1 = criarComando idModulo, Const.TYPE_12
             comando1.parameters << new Parameter(Const.HEXA, Const.CINCO_MIL)
             comando1.parameters << new Parameter(Const.AUXOUTPUTDATA, Const.NOVE_ZEROS)
 
             comandos << comando1
         }
 
-        def comando = criarComando idModulo, Const.TYPE_12
+        def comando2 = criarComando idModulo, Const.TYPE_12
 
-        comando.parameters << new Parameter(Const.FORMAT,Const.HEXA) << new Parameter(Const.AUXOUTPUTDATA,status?.codigo)
-        [comando]
+        comando2.parameters << new Parameter(Const.FORMAT,Const.HEXA) << new Parameter(Const.AUXOUTPUTDATA,status?.codigo)
+        comandos << comando2
+
+        comandos
     }
 }
