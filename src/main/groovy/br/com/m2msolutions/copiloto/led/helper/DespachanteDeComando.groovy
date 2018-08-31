@@ -8,7 +8,6 @@ import redis.clients.jedis.Jedis
 @CompileStatic
 class DespachanteDeComando {
 
-    private Jedis jedis
     private String host
     private Integer port
 
@@ -26,19 +25,11 @@ class DespachanteDeComando {
             }
         }
 
-        fecharConexao()
-    }
-
-    private fecharConexao(){
         jedis?.close()
     }
 
     private Jedis criarConexao(){
-
-        if(!jedis)
-            jedis = new Jedis(host,port)
-
-        jedis
+        new Jedis(host,port)
     }
 
     private String criarChave(Integer idCliente,Integer idVeiculo){
